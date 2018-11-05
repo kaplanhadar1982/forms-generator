@@ -10,6 +10,6 @@ module.exports.postTests = ('/tests',(req, res) => {
     const content = req.body.content;
     res.status(201).json({
         "message":"Test created",
-        "item": {"title":"fdsfds","content":"fdsfds"}
+        "item": {"title":title,"content":content}
     });
 });
