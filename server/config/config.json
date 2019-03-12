@@ -1,8 +1,10 @@
 {
   "test": {
-    "PORT": 3000
+    "PORT": 3000,
+    "JWTSECRET":"alonamitrotem"
   },
   "development": {
-    "PORT": 3000
+    "PORT": 3000,
+    "JWTSECRET":"alonamitrotem"
   }
 }

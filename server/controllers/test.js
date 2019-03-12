@@ -1,18 +1,19 @@
 const TestItem = require('../models/test');
 
-module.exports.getTestItems = ((req, res) => {
-    TestItem.find()
-        .then(testItems =>{
-            res.status(200).json({
-                "testItems":testItems
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                "message":"error",
-                "log": err
-            });
+module.exports.getTestItems = (async (req, res) => {
+    try{
+        const testItems = await TestItem.find();
+    
+        res.status(200).json({
+            "testItems":testItems
         });
+    }
+    catch(err){
+        res.status(500).json({
+            "message":"error",
+            "log": err
+        });
+    }  
 });
 
 module.exports.getTestItem = ((req, res) => {
@@ -31,24 +32,23 @@ module.exports.getTestItem = ((req, res) => {
 });
 
 
-module.exports.postTestItem = ((req, res) => {
+module.exports.postTestItem = (async (req, res) => {
     const field1 = req.body.field1;
     const field2 = req.body.field2;
     const testItem = new TestItem({'field1':field1,'field2':field2});
-    testItem.save()
-        .then(result=>{
-            res.status(201).json({
-                "message":"Test Item created",
-                "log": result
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                "message":"error",
-                "log": err
-            });
+    try{
+        const result = await testItem.save();
+        res.status(201).json({
+            "message":"Test Item created",
+            "log": result
         });
-    
+    }
+    catch(err){
+         res.status(500).json({
+            "message":"error",
+            "log": err
+        });
+    }
 });
 
 module.exports.putTestItem = ((req, res) => {
